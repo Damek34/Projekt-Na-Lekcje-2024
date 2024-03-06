@@ -7,15 +7,19 @@ public class Symulator {
 
     public static List<Drzewo> lista_drzew;
     public static List<Trawa> lista_traw;
+    public static List<Krolik> lista_krolikow;
     public static int nowe_drzewa = 0;
     public static int nowe_trawy = 0;
+    public static int nowe_kroliki = 0;
 
     public static void main(String[] args) {
 
         lista_drzew = new ArrayList<>();
         lista_traw = new ArrayList<>();
+        lista_krolikow = new ArrayList<>();
+
         Scanner skaner = new Scanner(System.in);
-        int liczba_cyklow = 0, ile_drzew, ile_traw;
+        int liczba_cyklow = 0, ile_drzew, ile_traw, ile_krolikow;
        // boolean kontynuacja_setup = true;
 
         System.out.println("Witaj w symulatorze ekosystemu!");
@@ -37,15 +41,25 @@ public class Symulator {
             nowaTrawa();
         }
 
+
+        System.out.println("Okej!");
+
+        ile_krolikow = ileKrolikow();
+
+        for(int i = 0; i < ile_krolikow; i++){
+            nowyKrolik();
+        }
+
         for(int i = 1; i <= liczba_cyklow; i++){
             System.out.println("\nCykl " + i);
             Drzewo.aktualizuj(lista_drzew);
             Trawa.aktualizuj(lista_traw);
+            Krolik.aktualizuj(lista_krolikow);
 
             boolean kontynuacja = false;
             while(!kontynuacja){
                 String nastepny_cykl = "N";
-                System.out.println("Przewinąć do kolejnego cyklu? (Wpisz literę 'T')");
+                System.out.println("\nPrzewinąć do kolejnego cyklu? (Wpisz literę 'T')");
                 nastepny_cykl = skaner.next();
 
                 switch (nastepny_cykl){
@@ -72,6 +86,11 @@ public class Symulator {
         System.out.println("\nLiczba traw: " + Trawa.ile_organizmow_zyje);
         System.out.println("Liczba obumarłych traw: " + Trawa.ile_organizmow_ubumarlo);
         System.out.println("Łącznie istniało " + (Trawa.ile_organizmow_ubumarlo + Trawa.ile_organizmow_zyje) + " traw");
+
+
+        System.out.println("\nLiczba królików: " + Krolik.ile_organizmow_zyje);
+        System.out.println("Liczba zmarłych królików: " + Krolik.ile_organizmow_ubumarlo);
+        System.out.println("Łącznie istniało " + (Krolik.ile_organizmow_ubumarlo + Krolik.ile_organizmow_zyje) + " królików");
 
     }
 
@@ -126,6 +145,23 @@ public class Symulator {
         return liczba_drzew;
     }
 
+    static int ileKrolikow(){
+        Scanner skaner = new Scanner(System.in);
+        int liczba_krolikow;
+
+        System.out.println("Ile królików ma pojawić się w 1 cyklu symulacji?");
+
+        try{
+            liczba_krolikow = skaner.nextInt();
+
+        }
+        catch (InputMismatchException e){
+            System.out.println("Wprowadzono niewłaściwą liczbę!");
+            liczba_krolikow = ileKrolikow();
+        }
+        return liczba_krolikow;
+    }
+
     static void noweDrzewo(){
         Drzewo drzewo = new Drzewo(true, Drzewo.nadajCzasZycia(), Drzewo.nadajCzasDoRozmnazania());
         lista_drzew.add(drzewo);
@@ -136,5 +172,11 @@ public class Symulator {
         Trawa trawa = new Trawa(true, Trawa.nadajCzasZycia(), Trawa.nadajCzasDoRozmnazania());
         lista_traw.add(trawa);
         nowe_trawy++;
+    }
+
+    static void nowyKrolik(){
+        Krolik krolik = new Krolik(true, Krolik.nadajCzasZycia(), Krolik.nadajCzasDoRozmnazania());
+        lista_krolikow.add(krolik);
+        nowe_kroliki++;
     }
 }
