@@ -45,66 +45,66 @@ public class Wilk {
 
     public static int nadajCzasZycia(){
         Random random = new Random();
-        return 8 + random.nextInt(5);
+        return 18 + random.nextInt(7);
     }
 
     public static int nadajCzasDoRozmnazania(){
         Random random = new Random();
-        return 4 + random.nextInt(3);
+        return 17 + random.nextInt(6);
     }
 
     public boolean czyCzasZyciaDobieglKonca() {
         return dlugosc_zycia <= 0;
     }
 
-    /* TODO
 
-    public static void aktualizuj(List<Krolik> krolik) {
+
+    public static void aktualizuj(List<Wilk> wilk) {
         Random generator_smierci = new Random();
-        int rodzaj_smierci;
-        int naturalna = 0;
-        int upolowana = 0;
+       // int rodzaj_smierci;
+       // int naturalna = 0;
+       // int upolowana = 0;
 
 
-        int martwe_krolki = 0;
-        for (int i = 0; i < krolik.size(); i++) {
-            if (krolik.get(i).czyCzasZyciaDobieglKonca()) {
-                krolik.get(i).setCzy_zyje(false);
-                martwe_krolki++;
+        int martwe_wilki = 0;
+        for (int i = 0; i < wilk.size(); i++) {
+            if (wilk.get(i).czyCzasZyciaDobieglKonca()) {
+                wilk.get(i).setCzy_zyje(false);
+                martwe_wilki++;
                 ile_organizmow_zyje--;
-                krolik.remove(krolik.get(i));
+                wilk.remove(wilk.get(i));
 
 
-                rodzaj_smierci = generator_smierci.nextInt(4);
+               // rodzaj_smierci = generator_smierci.nextInt(4);
 
                 //if(Wilk.)
 
-                    if(rodzaj_smierci %2 == 0){
-                        naturalna++;
-                    }
-                    else{
-                        upolowana++;
-                    }
+                //    if(rodzaj_smierci %2 == 0){
+               //         naturalna++;
+               //     }
+               //     else{
+                //        upolowana++;
+                //    }
 
 
             } else {
-                krolik.get(i).setDlugosc_zycia(krolik.get(i).getDlugosc_zycia() - 1);
-                if (krolik.get(i).getCzas_do_rozmnazania() == 0 && Krolik.ile_organizmow_zyje >= 2) {
-                    Symulator.nowyKrolik();
+                wilk.get(i).setDlugosc_zycia(wilk.get(i).getDlugosc_zycia() - 1);
+                if (wilk.get(i).getCzas_do_rozmnazania() == 0 && Wilk.ile_organizmow_zyje >= 2) {
+                    Symulator.nowyWilk();
                 }
-                krolik.get(i).setCzas_do_rozmnazania(krolik.get(i).getCzas_do_rozmnazania() - 1);
+                wilk.get(i).setCzas_do_rozmnazania(wilk.get(i).getCzas_do_rozmnazania() - 1);
             }
         }
-        if (martwe_krolki != 0) {
-            System.out.println(martwe_krolki + " królików zmarło w tym cyklu!");
-            ile_organizmow_ubumarlo += martwe_krolki;
+        if (martwe_wilki != 0) {
+            System.out.println(martwe_wilki + " wilków zmarło w tym cyklu!");
+            ile_organizmow_ubumarlo += martwe_wilki;
         }
-        if (Symulator.nowe_drzewa != 0) {
-            System.out.println("Powstało " + Symulator.nowe_drzewa + " nowych drzew!");
-            Symulator.nowe_drzewa = 0;
+        if (Symulator.nowe_wilki != 0) {
+            System.out.println("Urodziło się " + Symulator.nowe_wilki + " nowych wilków!");
+            Symulator.nowe_wilki = 0;
         }
     }
 
 
-     */
+
 }

@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Random;
 
-public class Krolik {
+public class Owca {
     private boolean czy_zyje;
     private int dlugosc_zycia;
     private int czas_do_rozmnazania;
@@ -12,7 +12,7 @@ public class Krolik {
     static int ile_organizmow_ubumarlo = 0;
 
 
-    public Krolik(boolean czy_zyje, int dlugosc_zycia, int czas_do_rozmnazania) {
+    public Owca(boolean czy_zyje, int dlugosc_zycia, int czas_do_rozmnazania) {
         this.czy_zyje = czy_zyje;
         this.dlugosc_zycia = dlugosc_zycia;
         this.czas_do_rozmnazania = czas_do_rozmnazania;
@@ -45,12 +45,12 @@ public class Krolik {
 
     public static int nadajCzasZycia(){
         Random random = new Random();
-        return 8 + random.nextInt(5);
+        return 12 + random.nextInt(5);
     }
 
     public static int nadajCzasDoRozmnazania(){
         Random random = new Random();
-        return 4 + random.nextInt(3);
+        return 6 + random.nextInt(4);
     }
 
     public boolean czyCzasZyciaDobieglKonca() {
@@ -58,20 +58,20 @@ public class Krolik {
     }
 
 
-    public static void aktualizuj(List<Krolik> krolik) {
+    public static void aktualizuj(List<Owca> owca) {
         Random generator_smierci = new Random();
         int rodzaj_smierci;
         int naturalna = 0;
         int upolowana = 0;
 
 
-        int martwe_kroliki = 0;
-        for (int i = 0; i < krolik.size(); i++) {
-            if (krolik.get(i).czyCzasZyciaDobieglKonca()) {
-                krolik.get(i).setCzy_zyje(false);
-                martwe_kroliki++;
+        int martwe_owce = 0;
+        for (int i = 0; i < owca.size(); i++) {
+            if (owca.get(i).czyCzasZyciaDobieglKonca()) {
+                owca.get(i).setCzy_zyje(false);
+                martwe_owce++;
                 ile_organizmow_zyje--;
-                krolik.remove(krolik.get(i));
+                owca.remove(owca.get(i));
 
 
                 rodzaj_smierci = generator_smierci.nextInt(4);
@@ -92,25 +92,25 @@ public class Krolik {
 
 
             } else {
-                krolik.get(i).setDlugosc_zycia(krolik.get(i).getDlugosc_zycia() - 1);
-                if (krolik.get(i).getCzas_do_rozmnazania() == 0 && Krolik.ile_organizmow_zyje >= 2) {
-                    Symulator.nowyKrolik();
+                owca.get(i).setDlugosc_zycia(owca.get(i).getDlugosc_zycia() - 1);
+                if (owca.get(i).getCzas_do_rozmnazania() == 0 && Owca.ile_organizmow_zyje >= 2) {
+                    Symulator.nowaOwca();
                 }
-                krolik.get(i).setCzas_do_rozmnazania(krolik.get(i).getCzas_do_rozmnazania() - 1);
+                owca.get(i).setCzas_do_rozmnazania(owca.get(i).getCzas_do_rozmnazania() - 1);
             }
         }
-        if (martwe_kroliki != 0) {
-            System.out.println(martwe_kroliki + " królików zmarło w tym cyklu!");
+        if (martwe_owce != 0) {
+            System.out.println(martwe_owce + " owiec zmarło w tym cyklu!");
 
             if(upolowana > 0){
-                System.out.println(upolowana + " królików zostało upolowanych");
+                System.out.println(upolowana + " owiec zostało upolowanych");
             }
 
-            ile_organizmow_ubumarlo += martwe_kroliki;
+            ile_organizmow_ubumarlo += martwe_owce;
         }
-        if (Symulator.nowe_kroliki != 0) {
-            System.out.println("Urodziło się " + Symulator.nowe_kroliki + " nowych królików!");
-            Symulator.nowe_kroliki = 0;
+        if (Symulator.nowe_owce != 0) {
+            System.out.println("Urodziło się " + Symulator.nowe_owce + " nowych owiec!");
+            Symulator.nowe_owce = 0;
         }
     }
 
